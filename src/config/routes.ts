@@ -46,6 +46,9 @@ export const routes = {
     shipmentDetails: (id: string) => `/logistics/shipments/${id}`,
     tracking: (id: string) => `/logistics/tracking/${id}`,
   },
+  candidate: {
+    dashboard: '/candidate-dashboard',
+  },
   interview: {
     dashboard: '/interview',
     appointmentList: '/interview/list',

@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-import logoImg from '@public/logo.svg';
+import logoImg from '@public/aiinfoxlogo.svg';
 import { LAYOUT_OPTIONS } from '@/config/enums';
 import logoIconImg from '@public/logo-short.svg';
 import { OpenGraph } from 'next/dist/lib/metadata/types/opengraph-types';
@@ -27,16 +27,19 @@ export const metaObject = (
   return {
     title: title ? `${title} - AiINFOX` : siteConfig.title,
     description,
+    icons:{
+      icon: '/aiinfoxlogo.svg'
+    },
     openGraph: openGraph ?? {
       title: title ? `${title} - AiINFOX` : title,
       description,
       url: 'https://isomorphic-furyroad.vercel.app',
       siteName: 'AiINFOX', // https://developers.google.com/search/docs/appearance/site-names
-      images: {
-        url: 'https://s3.amazonaws.com/redqteam.com/isomorphic-furyroad/itemdep/isobanner.png',
-        width: 1200,
-        height: 630,
-      },
+      // images: {
+      //   url: 'https://s3.amazonaws.com/redqteam.com/isomorphic-furyroad/itemdep/isobanner.png',
+      //   width: 1200,
+      //   height: 630,
+      // },
       locale: 'en_US',
       type: 'website',
     },

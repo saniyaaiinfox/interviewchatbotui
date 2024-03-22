@@ -60,11 +60,27 @@ export const menuItems = (userEmail: string) => {
         href: '/',
         icon: <PiFolderNotchDuotone />,
       },
+      {
+        name: 'Candidates List',
+        href: routes.executive.dashboard,
+        icon: <PiBriefcaseDuotone />,
+      },
     ];
   }
 
   if (userEmail === hardcodedUsers.candidate.email) {
-    return [];
+    return [
+      {
+        name: 'Overview',
+      },
+      // label end
+      {
+        name: 'Candidate Dashboard',
+        href: routes.candidate.dashboard,
+        icon: <PiCalendarDuotone />,
+        // badge: 'UPD',
+      },
+    ];
   }
 
   if (userEmail === hardcodedUsers.hrManager.email) {

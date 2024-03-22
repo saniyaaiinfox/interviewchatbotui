@@ -31,6 +31,9 @@ export default async function Page() {
   if (userEmail === hardcodedUsers.hrManager.email) {
     redirect(routes.interview.dashboard);
   }
-
+  if (userEmail === hardcodedUsers.candidate.email) {
+    redirect(routes.candidate.dashboard);
+  }
+  
   redirect(routes.fileManager.dashboard);
 }

@@ -18,6 +18,7 @@ export const messages = {
   emailIsRequired: 'Email address is required',
   invalidEmail: 'Invalid email address',
   roleIsRequired: 'Role is required',
+  jobIsRequired: 'Job is required',
   permissionIsRequired: 'Permission is required',
   teamIsRequired: 'New member must be assigned to a team',
   productNameIsRequired: 'Product name is required',

@@ -13,6 +13,7 @@ import RecentCustomers from '@/app/shared/executive/recent-customers';
 import TotalProfitLoss from '@/app/shared/executive/total-profit-loss';
 import MonthlySalesGrowth from '@/app/shared/executive/monthly-sales-growth';
 import SalesByCategory from '@/app/shared/executive/sales-by-category';
+import MyApplications from './my-applications';
 
 interface IndexProps {
   className?: string;
@@ -26,7 +27,8 @@ export default function ExecutiveDashboard({ className }: IndexProps) {
         className
       )}
     >
-      <StatsCards />
+      <MyApplications />
+      {/* <StatsCards />
       <div className="grid grid-cols-1 gap-5 @4xl:grid-cols-2 2xl:gap-x-6 2xl:gap-y-7">
         <RevenueExpense />
         <Forecast />
@@ -47,7 +49,7 @@ export default function ExecutiveDashboard({ className }: IndexProps) {
         <ArrBySignUp />
         <ActiveUsers />
       </div>
-      <RecentCustomers />
+      <RecentCustomers /> */}
     </div>
   );
 }
