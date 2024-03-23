@@ -95,4 +95,5 @@ export const authOptions: NextAuthOptions = {
       allowDangerousEmailAccountLinking: true,
     }),
   ],
+  secret: process.env.NEXTAUTH_SECRET,
 };
