@@ -25,7 +25,7 @@ export default function PageHeader({
             {title}
           </Title>
 
-          <Breadcrumb
+          {/* <Breadcrumb
             separator=""
             separatorVariant="circle"
             className="flex-wrap"
@@ -38,7 +38,7 @@ export default function PageHeader({
                 {item.name}
               </Breadcrumb.Item>
             ))}
-          </Breadcrumb>
+          </Breadcrumb> */}
         </div>
         {children}
       </div>

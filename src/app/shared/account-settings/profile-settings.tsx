@@ -54,7 +54,7 @@ export default function ProfileSettingsView() {
           return (
             <>
               <ProfileHeader
-                title="Olivia Rhye"
+                title="Jatinder Singla"
                 description="Update your photo and personal details."
               >
                 <div className="w-full sm:w-auto md:ms-auto">
@@ -171,25 +171,10 @@ export default function ProfileSettingsView() {
                     }
                     type="email"
                     className="col-span-full"
-                    placeholder="georgia.young@example.com"
+                    placeholder="jainder.singla@aiinfox.com"
                     {...register('email')}
                     error={errors.email?.message}
                   />
-                </FormGroup>
-
-                <FormGroup
-                  title="Portfolio Projects"
-                  description="Share a few snippets of your work"
-                  className="pt-7 @2xl:pt-9 @3xl:grid-cols-12 @3xl:pt-11"
-                >
-                  <div className="@3xl:col-span-2">
-                    <UploadZone
-                      name="portfolios"
-                      getValues={getValues}
-                      setValue={setValue}
-                      error={errors?.portfolios?.message as string}
-                    />
-                  </div>
                 </FormGroup>
               </div>
               <FormFooter
@@ -225,7 +210,7 @@ export function ProfileHeader({
       <div className="relative z-10 mx-auto flex w-full max-w-screen-2xl flex-wrap items-end justify-start gap-6 border-b border-dashed border-muted pb-10">
         <div className="relative -top-1/3 aspect-square w-[110px] overflow-hidden rounded-full border-[6px] border-white bg-gray-100 shadow-profilePic @2xl:w-[130px] @5xl:-top-2/3 @5xl:w-[150px] dark:border-gray-50 3xl:w-[200px]">
           <Image
-            src="https://isomorphic-furyroad.s3.amazonaws.com/public/profile-image.webp"
+            src="/Singla.png"
             alt="profile-pic"
             fill
             sizes="(max-width: 768px) 100vw"

@@ -48,16 +48,16 @@ const viewOptions = [
     label: 'All',
   },
   {
-    value: 'Cancer',
-    label: 'Cancer',
+    value: 'IT',
+    label: 'IT',
   },
   {
-    value: 'Pregnancy',
-    label: 'Pregnancy',
+    value: 'DigitalMarketing',
+    label: 'Digital Marketing',
   },
   {
-    value: 'Dentist',
-    label: 'Dentist',
+    value: 'ContentWriting',
+    label: 'Content Writing',
   },
 ];
 
@@ -74,7 +74,7 @@ export default function AppointmentTodo({ className }: { className?: string }) {
       className={cn('overflow-hidden bg-gray-50 @container', className)}
       action={
         <DropdownAction
-          className="rounded-lg border"
+          className="rounded-lg border w-[calc(150px)]"
           options={viewOptions}
           onChange={handleChange}
           dropdownClassName="!z-0"

@@ -87,7 +87,7 @@ export default function PersonalInfoView() {
                     <PiEnvelopeSimple className="h-6 w-6 text-gray-500" />
                   }
                   type="email"
-                  placeholder="georgia.young@example.com"
+                  placeholder="jatinder.singla@aiinfox.com"
                   {...register('email')}
                   error={errors.email?.message}
                 />
@@ -205,21 +205,6 @@ export default function PersonalInfoView() {
                     />
                   )}
                 />
-              </FormGroup>
-
-              <FormGroup
-                title="Portfolio Projects"
-                description="Share a few snippets of your work"
-                className="pt-7 @2xl:pt-9 @3xl:grid-cols-12 @3xl:pt-11"
-              >
-                <div className="mb-5 @3xl:col-span-2">
-                  <UploadZone
-                    name="portfolios"
-                    getValues={getValues}
-                    setValue={setValue}
-                    error={errors?.portfolios?.message as string}
-                  />
-                </div>
               </FormGroup>
             </div>
 

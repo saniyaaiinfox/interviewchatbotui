@@ -52,8 +52,8 @@ export default function PasswordSettingsView({
           return (
             <>
               <ProfileHeader
-                title="Olivia Rhye"
-                description="olivia@example.com"
+                title="Jatinder Singla"
+                description="jatinder.singla@aiinfox.com"
               />
 
               <div className="mx-auto w-full max-w-screen-2xl">
@@ -119,7 +119,7 @@ export default function PasswordSettingsView({
           );
         }}
       </Form>
-      <LoggedDevices className="mt-10" />
+      {/* <LoggedDevices className="mt-10" /> */}
     </>
   );
 }
