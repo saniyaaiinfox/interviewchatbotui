@@ -74,12 +74,12 @@ export default function MyApplicationsTable({
       className={className}
       headerClassName="mb-6 items-start flex-col @[57rem]:flex-row @[57rem]:items-center"
       actionClassName="grow @[57rem]:ps-11 ps-0 items-center w-full @[42rem]:w-full @[57rem]:w-auto "
-      title="My Applications"
+      title="Candidates"
       titleClassName="whitespace-nowrap"
       action={
         <div className="mt-2 flex justify-end">
           <ModalButton
-            label="Add New Application"
+            label="Add New Candidate"
             view={<CreateApplication />}
             customSize="600px"
             className="mt-0"

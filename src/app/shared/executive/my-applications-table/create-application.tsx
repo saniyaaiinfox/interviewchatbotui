@@ -74,7 +74,7 @@ export default function CreateApplication() {
           <>
             <div className="col-span-full flex items-center justify-between">
               <Title as="h4" className="font-semibold">
-                Add a new Application
+                Add Candidate
               </Title>
               <ActionIcon size="sm" variant="text" onClick={closeModal}>
                 <PiXBold className="h-auto w-5" />
@@ -95,7 +95,7 @@ export default function CreateApplication() {
               {...register('job')}
               error={errors.job?.message}
             />
-            <Controller
+            {/* <Controller
               name="dob"
               control={control}
               render={({ field: { value, onChange, onBlur } }) => (
@@ -108,8 +108,8 @@ export default function CreateApplication() {
                   selected={value}
                 />
               )}
-            />
-            <Controller
+            /> */}
+            {/* <Controller
               name="meetingSchedule"
               control={control}
               render={({ field: { value, onChange, onBlur } }) => (
@@ -124,14 +124,14 @@ export default function CreateApplication() {
                   selected={value}
                 />
               )}
-            />
+            /> */}
             <Controller
               name="candidateFiles"
               control={control}
               render={({ field: { value, onChange, onBlur } }) => (
                 <div className="col-span-full">
                   <Upload
-                    label={'Candidate Files'}
+                    label={'Upload Resume'}
                     ref={imageRef}
                     accept={'pdf'}
                     multiple={false}
@@ -196,7 +196,7 @@ export default function CreateApplication() {
                 isLoading={isLoading}
                 className="w-full @xl:w-auto"
               >
-                Create Application
+                Add Candidate
               </Button>
             </div>
           </>

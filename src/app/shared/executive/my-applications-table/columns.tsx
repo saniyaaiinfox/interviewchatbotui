@@ -77,17 +77,17 @@ export const getColumns = ({
     ),
   },
 
-  {
-    title: (
-      <HeaderCell
-        title={<span className="whitespace-nowrap">Date of Birth</span>}
-      />
-    ),
-    dataIndex: 'dob',
-    key: 'dob',
-    width: 250,
-    render: (dob: Date) => <DateCell date={dob} />,
-  },
+  // {
+  //   title: (
+  //     <HeaderCell
+  //       title={<span className="whitespace-nowrap">Date of Birth</span>}
+  //     />
+  //   ),
+  //   dataIndex: 'dob',
+  //   key: 'dob',
+  //   width: 250,
+  //   render: (dob: Date) => <DateCell date={dob} />,
+  // },
   {
     title: (
       <HeaderCell
