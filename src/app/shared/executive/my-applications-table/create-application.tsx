@@ -45,21 +45,62 @@ export default function CreateApplication() {
 
   const imageRef = useRef<HTMLInputElement>(null);
 
-  const onSubmit: SubmitHandler<CreateApplicationInput> = (data) => {
+  const onSubmit: SubmitHandler<CreateApplicationInput> = (data: any) => {
+    
+    setLoading(true);
     // set timeout ony required to display loading state of the create category button
     const formattedData = {
       ...data,
       createdAt: new Date(),
     };
-    setLoading(true);
-    setTimeout(() => {
-      console.log('formattedData', formattedData);
-      setLoading(false);
-      setReset({
-        ...defaultValues,
+
+    console.log(data);
+    const formData = new FormData();
+    for (const key in data) {
+      if (data.hasOwnProperty(key)) {
+        if (key === 'candidateFiles' && data[key]) {
+          data[key].forEach((file: any, index: any) => {
+            formData.append(`${key}[${index}]`, file);
+          });
+        } else {
+          formData.append(key, data[key]);
+        }
+      }
+    }
+    
+    console.log(formData);
+
+    fetch('http://127.0.0.1:5000/upload', {
+      method: 'POST',
+      body: formData,
+      headers: {
+        // 'Content-Type': 'application/json',
+        // 'Content-Type': 'application/x-www-form-urlencoded',
+        'Access-Control-Allow-Origin': '*'
+      }
+    })
+      .then(response => response.json())
+      .then(result => {
+        console.log(result);
+        setLoading(false);
+        setReset({
+          ...defaultValues,
+        });
+        closeModal();
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        setLoading(false);
       });
-      closeModal();
-    }, 600);
+    // setLoading(true);
+    // setTimeout(() => {
+    //   console.log('formattedData', formattedData);
+    //   setLoading(false);
+    //   setReset({
+    //     ...defaultValues,
+    //   });
+    //   closeModal();
+    // }, 600);
   };
 
   return (
@@ -95,36 +136,6 @@ export default function CreateApplication() {
               {...register('job')}
               error={errors.job?.message}
             />
-            {/* <Controller
-              name="dob"
-              control={control}
-              render={({ field: { value, onChange, onBlur } }) => (
-                <DatePicker
-                  inputProps={{ label: 'DOB' }}
-                  placeholderText="Select Date"
-                  dateFormat="dd/MM/yyyy"
-                  onChange={onChange}
-                  onBlur={onBlur}
-                  selected={value}
-                />
-              )}
-            /> */}
-            {/* <Controller
-              name="meetingSchedule"
-              control={control}
-              render={({ field: { value, onChange, onBlur } }) => (
-                <DatePicker
-                  inputProps={{ label: 'Schedule Meeting' }}
-                  placeholderText="Select Date"
-                  dateFormat="dd-MMM-yy hh:mm a"
-                  onChange={onChange}
-                  showTimeInput
-                  onBlur={onBlur}
-                  popperPlacement="right-start"
-                  selected={value}
-                />
-              )}
-            /> */}
             <Controller
               name="candidateFiles"
               control={control}
@@ -165,15 +176,6 @@ export default function CreateApplication() {
                               <PiFilePdf className="h-5 w-5" />
                             </div>
                             <div className="truncate px-2.5">{file.name}</div>
-                            {/* <ActionIcon
-                              onClick={() => handleImageDelete(index)}
-                              size="sm"
-                              variant="flat"
-                              color="danger"
-                              className="ms-auto flex-shrink-0 p-0 dark:bg-red-dark/20"
-                            >
-                              <PiTrashBold className="w-6" />
-                            </ActionIcon> */}
                           </div>
                         ))}
                       </div>
