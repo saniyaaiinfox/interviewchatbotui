@@ -96,6 +96,12 @@ export const menuItems = (userEmail: string) => {
         icon: <PiCalendarDuotone />,
         // badge: 'UPD',
       },
+      {
+        name: 'Job',
+        href: routes.job.dashboard,
+        icon: <PiCalendarDuotone />,
+        // badge: 'UPD',
+      },
     ];
   }
 
@@ -120,6 +126,12 @@ export const menuItems = (userEmail: string) => {
       name: 'Executive',
       href: routes.executive.dashboard,
       icon: <PiBriefcaseDuotone />,
+    },
+    {
+      name: 'Job',
+      href: routes.job.dashboard,
+      icon: <PiCalendarDuotone />,
+      // badge: 'UPD',
     },
     {
       name: 'Financial',

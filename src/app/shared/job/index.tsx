@@ -1,6 +1,5 @@
 import cn from '@/utils/class-names';
-import MyApplications from './my-applications';
-// import MyJob from '../job/my-job';
+import MyJob from '../job/my-job';
 
 interface IndexProps {
   className?: string;
@@ -14,8 +13,8 @@ export default function ExecutiveDashboard({ className }: IndexProps) {
         className
       )}
     >
-      <MyApplications />
-      {/* <MyJob /> */}
+    
+      <MyJob />
       {/* <StatsCards />
       <div className="grid grid-cols-1 gap-5 @4xl:grid-cols-2 2xl:gap-x-6 2xl:gap-y-7">
         <RevenueExpense />

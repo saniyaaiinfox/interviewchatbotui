@@ -8,26 +8,22 @@ import { Input, Button, ActionIcon, Title, Select, Text } from 'rizzui';
 import { useModal } from '@/app/shared/modal-views/use-modal';
 import Upload from '@/components/ui/upload';
 import SimpleBar from 'simplebar-react';
-import {
-  CreateApplicationInput,
-  createApplicationSchema,
-} from '@/utils/validators/create-application.schema';
+import { CreateJobInput, createJobSchema } from '@/utils/validators/create-job.schema';
 import { useQueryClient } from '@tanstack/react-query';
-import { applicationQueryKey } from '.';
-
-export default function CreateApplication() {
+import { jobQueryKey} from '.';
+export default function CreateJob() {
   const defaultValues: Omit<
-    CreateApplicationInput,
+    CreateJobInput,
     'meetingSchedule' | 'dob'
   > & {
     meetingSchedule: Date | undefined;
     dob: Date | undefined;
   } = {
-    candidateFiles: [],
-    candidateName: '',
+    jdFiles: [],
+    jobName: '',
     meetingSchedule: undefined,
     dob: undefined,
-    job: '',
+    location: '',
   };
   const queryClient = useQueryClient();
   const { closeModal } = useModal();
@@ -36,7 +32,7 @@ export default function CreateApplication() {
 
   const imageRef = useRef<HTMLInputElement>(null);
 
-  const onSubmit: SubmitHandler<CreateApplicationInput> = (data: any) => {
+  const onSubmit: SubmitHandler<CreateJobInput> = async (data: any) => {
     setLoading(true);
     // set timeout ony required to display loading state of the create category button
     const formattedData = {
@@ -48,40 +44,57 @@ export default function CreateApplication() {
     const formData = new FormData();
     for (const key in data) {
       if (data.hasOwnProperty(key)) {
-        if (key === 'candidateFiles' && data[key]) {
-          // data[key].forEach((file: any, index: any) => {
-          //   formData.append(`${key}[${index}]`, file);
-          // });
-          formData.append('candidateFiles', data.candidateFiles[0]);
+        if (key === 'jdFiles' && data[key]) {
+          formData.append('jdFiles', data.jdFiles[0]);
         } else {
           formData.append(key, data[key]);
         }
       }
     }
-    
+
     let uploadedFilePath = '';
+
     console.log(formData);
-    formData.append('candidateFiles', uploadedFilePath);
-    fetch('http://127.0.0.1:5000/upload_application_data', {
+
+    // try {
+    //   const uploadJdData = new FormData();
+    //   uploadJdData.set('file', data.jdFiles[0]);
+
+    //   const res = await fetch('/api/upload', {
+    //     method: 'POST',
+    //     body: uploadJdData,
+    //   });
+    //   const result = await res.json();
+    //   if (typeof result === 'object' && result !== null && 'path' in result) {
+    //     uploadedFilePath = result.path as string;
+    //   }
+    //   // handle the error
+    //   if (!res.ok) throw new Error(await res.text());
+    // } catch (e: any) {
+    //   // Handle errors here
+    //   console.error(e);
+    // }
+    formData.append('jdFiles', uploadedFilePath);
+    fetch('http://127.0.0.1:5000/upload_job_data', {
       method: 'POST',
       body: formData,
       headers: {
         // 'Content-Type': 'application/json',
         // 'Content-Type': 'application/x-www-form-urlencoded',
-        'Access-Control-Allow-Origin': '*'
-      }
+        'Access-Control-Allow-Origin': '*',
+      },
     })
-      .then(response => response.json())
-      .then(result => {
+      .then((response) => response.json())
+      .then((result) => {
         console.log(result);
-        queryClient.invalidateQueries({ queryKey: [applicationQueryKey] });
+        queryClient.invalidateQueries({ queryKey: [jobQueryKey] });
         setLoading(false);
         setReset({
           ...defaultValues,
         });
         closeModal();
       })
-      .catch(error => {
+      .catch((error) => {
         console.error('Error:', error);
         setLoading(false);
       });
@@ -95,12 +108,11 @@ export default function CreateApplication() {
       closeModal();
     }, 600);
   };
-
   return (
-    <Form<CreateApplicationInput>
+    <Form<CreateJobInput>
       resetValues={reset}
       onSubmit={onSubmit}
-      validationSchema={createApplicationSchema}
+      validationSchema={createJobSchema}
       className="grid grid-cols-1 gap-6 p-6 @container md:grid-cols-2 [&_.rizzui-input-label]:font-medium [&_.rizzui-input-label]:text-gray-900"
     >
       {({ register, control, watch, formState: { errors } }) => {
@@ -108,42 +120,34 @@ export default function CreateApplication() {
           <>
             <div className="col-span-full flex items-center justify-between">
               <Title as="h4" className="font-semibold">
-                Add Candidate
+                Add Job
               </Title>
               <ActionIcon size="sm" variant="text" onClick={closeModal}>
                 <PiXBold className="h-auto w-5" />
               </ActionIcon>
             </div>
             <Input
-              label="Candidate Name"
-              placeholder="Enter Candidate's full name"
-              {...register('candidateName')}
+              label="Job Name"
+              placeholder="Enter Job name"
+              {...register('jobName')}
               className="col-span-full"
-              error={errors.candidateName?.message}
+              error={errors.jobName?.message}
             />
 
             <Input
-              label="Job"
-              placeholder="Enter Job title"
+              label="Location"
+              placeholder="Enter Location"
               className="col-span-full"
-              {...register('job')}
-              error={errors.job?.message}
-            />
-
-            <Input
-              label="Meeting Schedule"
-              placeholder="Enter Meeting Schedule"
-              className="col-span-full"
-              {...register('meetingSchedule')}
-              error={errors.meetingSchedule?.message}
+              {...register('location')}
+              error={errors.location?.message}
             />
             <Controller
-              name="candidateFiles"
+              name="jdFiles"
               control={control}
               render={({ field: { value, onChange, onBlur } }) => (
                 <div className="col-span-full">
                   <Upload
-                    label={'Upload Resume'}
+                    label={'Upload JD'}
                     ref={imageRef}
                     accept={'pdf'}
                     multiple={false}
@@ -199,7 +203,7 @@ export default function CreateApplication() {
                 isLoading={isLoading}
                 className="w-full @xl:w-auto"
               >
-                Add Candidate
+                Add Job
               </Button>
             </div>
           </>

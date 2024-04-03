@@ -7,10 +7,11 @@ import { useTable } from '@/hooks/use-table';
 import ControlledTable from '@/components/controlled-table';
 import { getColumns } from './columns';
 import ModalButton from '@/app/shared/modal-button';
-import CreateApplication from './create-application';
+// import { jobData } from '@/data/job-data';
+import CreateJob from './create-job';
 import { useQuery } from '@tanstack/react-query';
-export const applicationQueryKey = 'candidate-application-data';
-export default function MyApplicationsTable({
+export const jobQueryKey = 'candidate-job-data';
+export default function MyJobTable({
   className,
 }: {
   className?: string;
@@ -23,38 +24,43 @@ export default function MyApplicationsTable({
     },
   });
 
-  const onDeleteItem = useCallback((applicationId: string) => {
-    handleDelete(applicationId);
+  const onDeleteItem = useCallback((jobId: string) => {
+    handleDelete(jobId);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  type applicationData = { id: string; candidateFiles: string; 
-    "applicationId" : string;
-    "candidateName": string;
-    "meetingSchedule": string}
+  type jobData = { id: string; jdFiles: string;
+  "jobId" : string;
+  "jobName": string;
+  "location": string}
 
-    const { data } = useQuery<applicationData[]>({
-      queryKey: [applicationQueryKey],
-      queryFn: async () => {
-        const response = await fetch(
-          'http://127.0.0.1:5000/upload_application_data',
-          { method: 'GET' }
-        );
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        return await response.json() as unknown as applicationData[];
-      },
-      // initialData: [],
-      staleTime: Infinity,
-    });
-    console.log(data,"xggvx")
-  // {
-  //   "Id": 1,
-  //   "applicationId": "41072784-075d-4fa6-91cf-9325d48c66d3",
-  //   "candidateFiles": "C:\\Users\\Sanya\\Downloads\\Flask_Bot1\\Flask_Bot/tmp\\muskan12_3.pdf",
-  //   "candidateName": "Muskan arora",
-  //   "meetingSchedule": "11 april,24 6:00PM"
-  // },
+  // const [data, setData] = useState<jobData[]>([]);
+  
+  // useEffect(() => {
+  //   fetch('http://127.0.0.1:5000/upload_job_data')
+  //     .then((response) => response.json())
+  //     .then((json) => {
+  //       setData(json as jobData[]);
+  //     })
+  //     .catch((error) => console.error(error));
+  // }, []);
+
+  const { data } = useQuery<jobData[]>({
+    queryKey: [jobQueryKey],
+    queryFn: async () => {
+      const response = await fetch(
+        'http://127.0.0.1:5000/upload_job_data',
+        { method: 'GET' }
+      );
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return await response.json() as unknown as jobData[];
+    },
+    // initialData: [],
+    staleTime: Infinity,
+  });
+  console.log(data,"xggvx")
+
   const {
     isLoading,
     tableData,
@@ -98,19 +104,21 @@ export default function MyApplicationsTable({
       className={className}
       headerClassName="mb-6 items-start flex-col @[57rem]:flex-row @[57rem]:items-center"
       actionClassName="grow @[57rem]:ps-11 ps-0 items-center w-full @[42rem]:w-full @[57rem]:w-auto "
-      title="Candidates"
+      title="Jobs"
       titleClassName="whitespace-nowrap"
       action={
         <div className="mt-2 flex justify-end">
           <ModalButton
-            label="Add New Candidate"
-            view={<CreateApplication />}
+            label="Add New Job"
+            view={<CreateJob />}
             customSize="600px"
             className="mt-0"
-          />
+          /> 
         </div>
       }
     >
+
+
       <ControlledTable
         variant="modern"
         data={tableData}
@@ -126,6 +134,8 @@ export default function MyApplicationsTable({
           onChange: (page: number) => handlePaginate(page),
         }}
         className="-mx-5 lg:-mx-7"
+       
+        
       />
     </WidgetCard>
   );

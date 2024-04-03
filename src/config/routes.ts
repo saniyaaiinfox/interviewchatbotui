@@ -56,6 +56,9 @@ export const routes = {
   executive: {
     dashboard: '/executive',
   },
+  job: {
+    dashboard: '/job',
+  },
   analytics: '/analytics',
   financial: {
     dashboard: '/financial',

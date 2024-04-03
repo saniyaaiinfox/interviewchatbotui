@@ -218,7 +218,10 @@ export function useTable<T extends AnyObject>(
     handleSearch('');
     if (initialFilterState) return setFilters(initialFilterState);
   }
-
+  useEffect(() => {
+    handleReset();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [initialData]);
   /*
    * Set isFiltered and final filtered data
    */

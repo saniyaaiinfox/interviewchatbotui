@@ -12,6 +12,7 @@ import NextProgress from '@/components/next-progress';
 
 // styles
 import '@/app/globals.css';
+import Providers from './providers';
 
 export const metadata = {
   title: siteConfig.title,
@@ -36,13 +37,18 @@ export default async function RootLayout({
         suppressHydrationWarning
         className={cn(inter.variable, lexendDeca.variable, 'font-inter')}
       >
+        
         <AuthProvider session={session}>
           <ThemeProvider>
+          <Providers>
             <NextProgress />
+           
             {children}
+           
             <Toaster />
             <GlobalDrawer />
             <GlobalModal />
+            </Providers>
           </ThemeProvider>
         </AuthProvider>
       </body>

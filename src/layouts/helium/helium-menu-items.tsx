@@ -106,6 +106,11 @@ export const menuItems = (userEmail: string) => {
       icon: <PiBriefcase />,
     },
     {
+      name: 'Job',
+      href: routes.job.dashboard,
+      icon: <PiBriefcase />,
+    },
+    {
       name: 'Financial',
       href: routes.financial.dashboard,
       icon: <PiCurrencyCircleDollarFill />,

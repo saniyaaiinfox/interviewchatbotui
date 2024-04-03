@@ -2,14 +2,12 @@
 import { HeaderCell } from '@/components/ui/table';
 import { Text, Checkbox, ActionIcon, Tooltip, Select } from 'rizzui';
 
-
-
 type Columns = {
   data: any[];
   sortConfig?: any;
   handleSelectAll: any;
   checkedItems: string[];
-  onDeleteItem: (applicationId: string) => void;
+  onDeleteItem: (jobId: string) => void;
   onHeaderCellClick: (value: string) => void;
   onChecked?: (id: string) => void;
 };
@@ -49,28 +47,27 @@ export const getColumns = ({
     ),
   },
   {
-    title: <HeaderCell title="Application Id" />,
-    onHeaderCell: () => onHeaderCellClick('applicationId'),
-    dataIndex: 'applicationId',
-    key: 'applicationId',
+    title: <HeaderCell title="Job Id" />,
+    onHeaderCell: () => onHeaderCellClick('jobId'),
+    dataIndex: 'jobId',
+    key: 'jobId',
     width: 130,
-    render: (applicationId: string) => <Text>#{applicationId}</Text>,
+    render: (jobId: string) => <Text>#{jobId}</Text>,
   },
   {
-    title: <HeaderCell title="Candidate Name" />,
-    onHeaderCell: () => onHeaderCellClick('candidateName'),
-    dataIndex: 'candidateName',
-    key: 'candidateName',
-    width: 150,
-    render: (candidateName: string) => (
+    title: <HeaderCell title="Job Name" />,
+    onHeaderCell: () => onHeaderCellClick('jobName'),
+    dataIndex: 'jobName',
+    key: 'jobName',
+    width: 130,
+    render: (jobName: string) => (
       <div>
         <Text className="text-sm font-medium text-gray-900 dark:text-gray-700">
-          {candidateName}
+          {jobName}
         </Text>
       </div>
     ),
   },
-
   // {
   //   title: (
   //     <HeaderCell
@@ -85,19 +82,15 @@ export const getColumns = ({
   {
     title: (
       <HeaderCell
-        title={<span className="whitespace-nowrap">Meeting Schedule</span>}
+        title={<span className="whitespace-nowrap">Location</span>}
       />
     ),
-    dataIndex: 'meetingSchedule',
-    key: 'meetingSchedule',
+    dataIndex: 'location',
+    key: 'location',
     width: 130,
-    render: (meetingSchedule: string) => (
-      <div>
-        <Text className="text-sm font-medium text-gray-900 dark:text-gray-700">
-          {meetingSchedule}
-        </Text>
-      </div>
+    render: (location: string) => (
+      // <DateCell date={new Date(location)} />
+      <span className="whitespace-nowrap">{location}</span>
     ),
   },
- 
 ];
